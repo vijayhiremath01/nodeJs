@@ -36,3 +36,12 @@ One is used for /livez, one for /readyz.
 Event loop delay tells how responsive the app is.
 🧠 Example:
 If event loop delay is too high, it means your server is overloaded and slow.
+
+4) Readability thresholds (config via env)
+const READINESS_THRESHOLDS = {
+  EVENT_LOOP_LAG_MS: Number.parseFloat(process.env.EVENT_LOOP_LAG_MS ?? '') || 70,
+  HEAP_USAGE_PERCENT: Number.parseFloat(process.env.HEAP_USAGE_PERCENT ?? '') || 0.85, // 85%
+} as const;
+Thresholds are configurable through env vars; defaults:
+event loop lag p99 > 70 ms → degraded
+heap usage ratio > 85% → degraded
